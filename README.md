@@ -1,6 +1,3 @@
-# AI-portfolio
-AI Projects
-
 ## Projects List
 
 | Path | Description | Note |
