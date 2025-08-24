@@ -12,14 +12,7 @@ A tool for analyzing the performance and results of segmentation models.
 ---
 
 ## 📽 Demo Video
-
-> ▶️ 아래 영상에서 실제 동작을 확인해보세요!
-
-<p align="center">
-  <a href="" target="_blank">
-    <img src="assets/analizer.png" width="600" alt="Watch the Demo"/>
-  </a>
-</p>
+preparing
 
 ---
 
