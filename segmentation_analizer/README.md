@@ -21,7 +21,8 @@ preparing
 - Segmenation 모델로 추론한 결과 확인
 - 모델의 confidence threshold로 mask 실시간 변화 확인 
 - 추론한 mask 이미지 저장  
-- Class별 픽셀 비율 확인  
+- Class별 픽셀 비율 확인
+- Class별 평균 신뢰고(Confidence) 확인
 
 ---
 
