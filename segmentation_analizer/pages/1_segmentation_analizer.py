@@ -1,76 +1,242 @@
+import os
+import numpy as np
+import cv2
+import torch
 import streamlit as st
 import pandas as pd
-import pydeck as pdk
-from urllib.error import URLError
-import torch
 from PIL import Image
-from torchvision import transforms
-import numpy as np
-import os
-import cv2
-import matplotlib.pyplot as plt
 from io import BytesIO
+
+from torchvision import transforms
 from streamlit_image_zoom import image_zoom
 
-from torchvision import transforms
-from torch import nn
-import torch.utils.model_zoo as model_zoo
-import torch.onnx
-import onnx
-import onnxruntime
+# =========================================================
+# i18n: language state & translations
+# =========================================================
+if "lang" not in st.session_state:
+    st.session_state.lang = "ko"  # 기본 한국어
 
-st.set_page_config(page_title="Segmentation Infer Analysis", layout="wide")
-st.markdown("# Segmentation Infer Analysis")
+TR = {
+    "ko": {
+        "page_title": "Segmentation Infer Analysis",
+        "title": "Segmentation Infer Analysis",
+        "language": "언어",
+        "lang_ko": "한국어",
+        "lang_en": "English",
 
-# === 세션 상태 초기화 ===
+        "options": "옵션",
+        "threshold": "1. 컨피던스 임계값",
+        "alpha": "2. 마스크 불투명도",
+        "view_mode": "3. 보기 모드",
+        "view_all": "전체 마스크",
+        "view_class": "클래스별 마스크",
+        "class_count": "4. 클래스 개수",
+        "class_select": "5. 클래스 선택",
+
+        "reset_uploaded_img":"🗑️ 업로드된 이미지 초기화",
+
+        "pick_image": "🔍 추론할 이미지를 선택하세요",
+        "image_title": "### 🖼️ {name}",
+        "table_title": "### 📊 분석 결과",
+        "col_class_id": "클래스 ID",
+        "col_pixel_pct": "픽셀(%)",
+        "col_avg_conf": "평균 Confidence",
+
+        "download_mask": "📥 마스크 저장 (PNG)",
+        "onnx_loaded": "ONNX 모델 로드: {path}",
+        "onnx_fallback": "ONNX 로드 실패 → PyTorch에서 DeepLabV3-ResNet101 모델 다운로드. 이유: {err}",
+        "torch_loaded": "PyTorch DeepLabV3-ResNet101 모델 다운로드 완료",
+        "torch_fail": "PyTorch 모델 로드도 실패했습니다: {err}",
+        "warn_set_model": "먼저 모델을 설정하세요.",
+        "sel_class_metric": "선택 클래스 평균 confidence",
+
+        "tab_all": "전체 이미지 분석",
+        "tab_single": "단일 이미지 분석",
+        "summary_title": "### 🧮 요약 결과 (전체 이미지 집계)",
+        "per_image_title": "### 🔎 이미지별 상세",
+        "download_summary": "📥 요약 CSV 다운로드",
+        "download_detail": "📥 상세 CSV 다운로드",
+
+        "summary_title_short": "### 요약 결과",
+        "detail_title_short": "### 이미지별 상세 테이블",
+
+        "col_image": "이미지",
+        "col_classes": "클래스",
+        "col_avg_conf_over_present": "평균 신뢰도(%)",
+        "cls_col_prefix": "클래스 ",
+        "cls_col_suffix": " 픽셀(%)",
+        "avg_conf_suffix": " 평균 신뢰도(%)",
+
+    },
+    "en": {
+        "page_title": "Segmentation Infer Analysis",
+        "title": "Segmentation Infer Analysis",
+        "language": "Language",
+        "lang_ko": "Korean",
+        "lang_en": "English",
+
+        "options": "Options",
+        "threshold": "1. Confidence Threshold",
+        "alpha": "2. Mask Opacity",
+        "view_mode": "3. View Mode",
+        "view_all": "All Masks",
+        "view_class": "Class Mask",
+        "class_count": "4. Classes",
+        "class_select": "5. Select Class",
+
+        "reset_uploaded_img":"🗑️ Clear uploaded images",
+        "pick_image": "🔍 Select an image to infer",
+        "image_title": "### 🖼️ {name}",
+        "table_title": "### 📊 Analysis Results",
+        "col_class_id": "Class ID",
+        "col_pixel_pct": "Pixel(%)",
+        "col_avg_conf": "Avg Confidence",
+
+        "download_mask": "📥 Download Mask (PNG)",
+        "onnx_loaded": "Loaded ONNX model: {path}",
+        "onnx_fallback": "Failed to load ONNX → download from PyTorch. Reason: {err}",
+        "torch_loaded": "The PyTorch DeepLabV3-ResNet101 model was downloaded successfully.",
+        "torch_fail": "Failed to load PyTorch model: {err}",
+        "warn_set_model": "Please set the model first.",
+        "sel_class_metric": "Avg confidence of selected class",
+
+        "tab_all": "All Images Analysis",
+        "tab_single": "Single Image Analysis",
+        "summary_title": "### 🧮 Summary (Aggregated over all images)",
+        "per_image_title": "### 🔎 Per-image Breakdown",
+        "download_summary": "📥 Download Summary CSV",
+        "download_detail": "📥 Download Detail CSV",
+
+        "summary_title_short": "### Summary",
+        "detail_title_short": "### Per-image Details",
+        "col_image": "Image",
+        "col_classes": "Classes",
+        "col_avg_conf_over_present": "Avg confidence(%)",
+        "cls_col_prefix": "class",
+        "cls_col_suffix": " pixel(%)",
+        "avg_conf_suffix": " avg_confidence(%)",
+
+    },
+}
+def t(key: str) -> str:
+    return TR[st.session_state.lang][key]
+
+st.set_page_config(page_title=t("page_title"), layout="wide")
+st.markdown(f"# {t('title')}")
+
+# --- Language switcher (sidebar) ---
+lang_choice = st.sidebar.radio(
+    t("language"),
+    (TR["ko"]["lang_ko"], TR["en"]["lang_en"]),
+    horizontal=True,
+    index=0 if st.session_state.lang == "ko" else 1,
+)
+st.session_state.lang = "ko" if lang_choice == TR["ko"]["lang_ko"] else "en"
+
+# =========================================================
+# Session state init
+# =========================================================
 if "upload_key" not in st.session_state:
     st.session_state.upload_key = 0
 if "uploaded_files" not in st.session_state:
     st.session_state.uploaded_files = []
 
-imge_size=(224,224)
-uploaded_files = st.file_uploader("",type=["png", "jpg", "jpeg"], accept_multiple_files=True,key=f"uploader_{st.session_state.upload_key}")
+# =========================================================
+# Uploader
+# =========================================================
+imge_size = (224, 224)
+uploaded_files = st.file_uploader(
+    "",
+    type=["png", "jpg", "jpeg"],
+    accept_multiple_files=True,
+    key=f"uploader_{st.session_state.upload_key}",
+)
 
-# === 초기화 버튼 ===
-if st.button("🗑️ 업로드된 이미지 초기화"):
-    st.session_state.upload_key += 1  # 먼저 키를 증가
+if st.button(t('reset_uploaded_img')):
+    st.session_state.upload_key += 1
     st.session_state.uploaded_files = []
     st.rerun()
 
-# 업로드한 파일 저장
 if uploaded_files:
     st.session_state.uploaded_files = uploaded_files
 
-# === model ===
-model = onnxruntime.InferenceSession("./deeplabv3_resnet101.onnx", providers=["CPUExecutionProvider"])
+# =========================================================
+# Model loading: ONNX → fallback to PyTorch
+# =========================================================
+MODEL_BACKEND = None  # "onnx" or "torch"
+model = None
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# --- (추가) 모델 출력으로 클래스 수 자동 추론 시도 ---
-def _autodetect_class_num(ort_session):
+ONNX_PATH = "./pages/deeplabv3_resnet101.onnx"
+
+# Try ONNX first
+try:
+    import onnxruntime
+    if not os.path.isfile(ONNX_PATH):
+        raise FileNotFoundError(f"ONNX not found: {ONNX_PATH}")
+    model = onnxruntime.InferenceSession(ONNX_PATH, providers=["CPUExecutionProvider"])
+    MODEL_BACKEND = "onnx"
+    st.info(t("onnx_loaded").format(path=ONNX_PATH))
+except Exception as e:
+    st.warning(t("onnx_fallback").format(err=e))
+    # Fallback: PyTorch torchvision
     try:
-        out_shape = ort_session.get_outputs()[0].shape  # 대개 [1, C, H, W] 또는 [N, C, ...]
+        import torchvision
+        from torchvision.models.segmentation import DeepLabV3_ResNet101_Weights
+        model = torchvision.models.segmentation.deeplabv3_resnet101(
+            weights=DeepLabV3_ResNet101_Weights.DEFAULT
+        ).to(device).eval()
+        MODEL_BACKEND = "torch"
+        st.success(t("torch_loaded"))
+    except Exception as e2:
+        st.error(t("torch_fail").format(err=e2))
+        st.stop()
+
+# =========================================================
+# Autodetect class num
+# =========================================================
+def _autodetect_class_num_onnx(ort_session):
+    try:
+        out_shape = ort_session.get_outputs()[0].shape  # [N,C,H,W]
         if len(out_shape) >= 2 and isinstance(out_shape[1], int) and out_shape[1] > 0:
             return int(out_shape[1])
     except Exception:
         pass
     return None
 
-_auto_cn = _autodetect_class_num(model)
+def _autodetect_class_num_torch(pt_model):
+    try:
+        # torchvision deeplabv3 classifier last Conv
+        return int(pt_model.classifier[-1].out_channels)
+    except Exception:
+        return None
 
-# === 사이드바 옵션들 ===
-st.sidebar.header("옵션")
-threshold = st.sidebar.slider("1. 컨피던스 임계값", 0.0, 1.0, 0.5, step=0.01)
-alpha = st.sidebar.slider("2. 마스크 불투명도", 0.0, 1.0, 0.3, step=0.05)
-view_mode = st.sidebar.radio("3. 보기 모드", ["전체 마스크", "클래스별 마스크"])
+_auto_cn = _autodetect_class_num_onnx(model) if MODEL_BACKEND == "onnx" else _autodetect_class_num_torch(model)
 
-# --- (변경) 클래스 개수 지정: 자동 추론 값이 있으면 기본값으로 사용 ---
-class_num = st.sidebar.number_input(
-    "4. 클래스 개수", min_value=1, max_value=512,
-    value=int(_auto_cn) if _auto_cn else 21, step=1
+# =========================================================
+# Sidebar options (i18n labels)
+# =========================================================
+st.sidebar.header(t("options"))
+threshold = st.sidebar.slider(t("threshold"), 0.0, 1.0, 0.5, step=0.01)
+alpha = st.sidebar.slider(t("alpha"), 0.0, 1.0, 0.7, step=0.05)
+
+# 내부 값 'all'/'class'로 관리 (표시는 다국어)
+view_mode = st.sidebar.selectbox(
+    t("view_mode"),
+    options=["all", "class"],
+    format_func=lambda x: t("view_all") if x == "all" else t("view_class"),
 )
 
-selected_class = st.sidebar.selectbox("5. 클래스 선택", list(range(class_num)))
+class_num = st.sidebar.number_input(
+    t("class_count"),
+    min_value=1, max_value=512,
+    value=int(_auto_cn) if _auto_cn else 21, step=1
+)
+selected_class = st.sidebar.selectbox(t("class_select"), list(range(class_num)))
 
-# --- (변경) 색상표: class_num에 맞춰 자동 생성 ---
+# =========================================================
+# Color map
+# =========================================================
 def build_color_map(n_classes: int):
     base = [
         (0,0,0),(0,255,0),(0,0,255),(255,255,0),(255,0,255),
@@ -81,101 +247,235 @@ def build_color_map(n_classes: int):
     ]
     if n_classes <= len(base):
         return {i: base[i] for i in range(n_classes)}
-    # HSV로 추가 색 생성
     cmap = {i: base[i] for i in range(len(base))}
     extra = n_classes - len(base)
     for k in range(extra):
-        hue = int(180 * (k / max(1, extra)))  # OpenCV HSV hue: 0~179
+        hue = int(180 * (k / max(1, extra)))  # 0~179 (OpenCV HSV)
         hsv = np.uint8([[[hue, 200, 255]]])
-        bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)[0,0]
+        bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)[0, 0]
         cmap[len(base)+k] = (int(bgr[0]), int(bgr[1]), int(bgr[2]))
     return cmap
-
 color_map = build_color_map(class_num)
 
-def infer(model,uploaded_file):
+# =========================================================
+# Softmax over channel (C,H,W)
+# =========================================================
+def softmax_channelwise(logits_chw: np.ndarray) -> np.ndarray:
+    shifted = logits_chw - logits_chw.max(axis=0, keepdims=True)
+    exp = np.exp(shifted)
+    return exp / exp.sum(axis=0, keepdims=True)
+
+# =========================================================
+# Inference
+# =========================================================
+def infer(model_obj, uploaded_file, backend: str):
     input_image = Image.open(uploaded_file).convert("RGB")
     preprocess = transforms.Compose([
         transforms.Resize(list(imge_size)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                             std=[0.229, 0.224, 0.225]),
     ])
+    input_tensor = preprocess(input_image)  # (3,H,W)
 
-    input_tensor = preprocess(input_image)
-    input_batch = input_tensor.unsqueeze(0)
+    if backend == "onnx":
+        # ONNX Runtime path
+        input_batch = input_tensor.unsqueeze(0).numpy()  # (1,3,H,W)
+        input_name = model_obj.get_inputs()[0].name
+        ort_outs = model_obj.run(None, {input_name: input_batch})
+        output = ort_outs[0].squeeze(0)  # (C,H,W) numpy
+    else:
+        # PyTorch path
+        input_batch = input_tensor.unsqueeze(0).to(device)  # (1,3,H,W)
+        with torch.no_grad():
+            out = model_obj(input_batch)['out'][0]  # (C,H,W) torch.Tensor
+        output = out.detach().cpu().numpy()
 
-    # (참고) onnxruntime은 torch.cuda / model.to('cuda')와 무관합니다. 아래 코드는 불필요.
-    # if torch.cuda.is_available():
-    #     input_batch = input_batch.to('cuda')
-    #     model.to('cuda')
+    input_np = np.array(input_image).astype(np.uint8)
+    resized_image = cv2.resize(input_np, imge_size, interpolation=cv2.INTER_LINEAR)
+    return output, resized_image
 
-    with torch.no_grad():
-        ort_inputs = {model.get_inputs()[0].name: input_batch.numpy()}
-        ort_outs = model.run(None, ort_inputs)
-        output = ort_outs[0]
-        output = output.squeeze(0)  # (C,H,W)
-
-    input_image = np.array(input_image).astype(np.uint8)
-    resized_image = cv2.resize(input_image, imge_size, interpolation=cv2.INTER_LINEAR)
-    return output,resized_image
-
-# === 추론 ===
+# =========================================================
+# Main UI (Tabs: All images / Single image)
+# =========================================================
 if st.session_state.uploaded_files:
-    filenames = [file.name for file in uploaded_files]
-    selected_file = st.selectbox("🔍 추론할 이미지를 선택하세요", filenames)
+    tab_all, tab_single = st.tabs([t("tab_all"), t("tab_single")])
 
-    for uploaded_file in uploaded_files:
-        if uploaded_file.name == selected_file:
+    # ---------- Tab 1: All Images Analysis ----------
+    with tab_all:
+        rows_summary = []
+        rows_detail = []
 
-            output,input_image = infer(model,uploaded_file)
+        for uf in st.session_state.uploaded_files:
+            # UploadedFile은 스트림이 소모될 수 있으니 바이트로 안전 처리
+            file_bytes = uf.getvalue()
+            output, _ = infer(model, BytesIO(file_bytes), MODEL_BACKEND)  # output: (C,H,W)
+            pred_mask = output.argmax(0)                                   # (H,W)
+            probs = softmax_channelwise(output)                            # (C,H,W)
 
-            if view_mode == "클래스별 마스크":
-                prob_map = output[selected_class]
-                mask_bin = (prob_map > threshold).astype(np.uint8)
-                mask_rgb = np.zeros_like(input_image)
-                color = color_map[selected_class]
-                for i in range(3):
-                    mask_rgb[:, :, i] = mask_bin * color[i]
-                # 전체 비율 표는 클래스별 보기에서는 생략
-                percentages = None
-            else:
-                pred_mask = output.argmax(0)
-                mask_rgb = np.zeros_like(input_image)
-                total_pixels = pred_mask.size
-                percentages = {}
-                for class_id in range(class_num):
-                    class_pixels = np.count_nonzero(pred_mask == class_id)
-                    percentages[class_id] = (class_pixels / total_pixels) * 100
-                    color = color_map[class_id]
-                    for i in range(3):
-                        mask_rgb[:, :, i][pred_mask == class_id] = color[i]
+            H, W = pred_mask.shape
+            total = H * W if H and W else 0
 
-            # 오버레이 이미지 생성
-            blended = cv2.addWeighted(input_image, 1 - alpha, mask_rgb, alpha, 0)
+            # --- 이미지별 present classes & 그들의 평균 confidence ---
+            present_classes = []
+            avg_conf_list = []
 
-            # 컬럼 분리
-            col1, col2 = st.columns([2, 1])
-            with col1:
-                st.markdown(f"### 🖼️ {uploaded_file.name}")
-                image_zoom(blended)
-            with col2:
-                if percentages is not None:
-                    df_percent = pd.DataFrame({
-                        "Class ID": list(percentages.keys()),
-                        "Pixel %": [round(v,2) for v in percentages.values()]
-                    })
-                    st.markdown("### 📊 클래스별 픽셀 비율")
-                    st.dataframe(df_percent)
+            for cid in range(class_num):
+                cmask = (pred_mask == cid)
+                ccount = int(cmask.sum())
+                if ccount > 0:
+                    present_classes.append(cid)
+                    avg_conf_list.append(float(probs[cid][cmask].mean()))
 
-            # 마스크 저장
-            mask_save = Image.fromarray(mask_rgb)
-            buf = BytesIO()
-            mask_save.save(buf, format="PNG")
-            buf.seek(0)
+            # classes: 1-based 표기 (예: "1, 5, 7")
+            classes_str = ", ".join(str(c) for c in present_classes) if present_classes else "-"
+
+            # avg_confidence: present classes의 평균 confidence를 평균낸 값
+            avg_conf_over_present = float(np.mean(avg_conf_list)) if avg_conf_list else 0.0
+
+            rows_summary.append({
+                t("col_image"): uf.name,
+                t("col_classes"): classes_str,
+                t("col_avg_conf_over_present"): round(avg_conf_over_present, 3),
+            })
+
+            # --- 이미지별 상세 행 생성 ---
+            row = { t("col_image"): uf.name }
+
+            # (1) class 1 ~ class N : 픽셀 비율(%)
+            for cid in range(class_num):
+                pct = (float((pred_mask == cid).sum()) / total * 100.0) if total else 0.0
+                col_name = f"{t('cls_col_prefix')}{cid}{t('cls_col_suffix')}"
+                row[col_name] = round(pct, 2)
+
+            # (2) class 1 ~ class N avg_confidence : 평균 confidence
+            for cid in range(class_num):
+                cmask = (pred_mask == cid)
+                avgc = float(probs[cid][cmask].mean()) if cmask.any() else 0.0
+                col_name = f"{t('cls_col_prefix')}{cid}{t('avg_conf_suffix')}"
+                row[col_name] = round(avgc, 3)
+
+            rows_detail.append(row)
+
+        # --- 표 렌더링 ---
+
+        df_summary = pd.DataFrame(rows_summary)
+        sum_title_col, sum_btn_col = st.columns([3, 1])
+        with sum_title_col:
+            st.markdown(t("summary_title_short"))  
+        with sum_btn_col:
+            csv_sum = df_summary.to_csv(index=False).encode("utf-8-sig")
             st.download_button(
-                label="📥 마스크 저장 (PNG)",
-                data=buf,
-                file_name=f"{selected_file[:-4]}_mask.png",
-                mime="image/png"
+                label=t("download_summary"),       
+                data=csv_sum,
+                file_name="summary_all_images.csv",
+                mime="text/csv",
+                key="dl_summary",
+                use_container_width=True
             )
-            break
+        st.dataframe(df_summary, use_container_width=True)
+
+
+        st.divider()  # 얇은 라인 + 기본 여백
+        st.markdown("<div style='height:48px'></div>", unsafe_allow_html=True) 
+
+        
+        df_detail = pd.DataFrame(rows_detail)
+        dl_title_col, dl_btn_col = st.columns([3, 1])
+        with dl_title_col:
+            st.markdown(t("detail_title_short"))  
+        with dl_btn_col:
+            csv_dl = df_detail.to_csv(index=False).encode("utf-8-sig")
+            st.download_button(
+                label=t("download_detail"),       
+                data=csv_dl,
+                file_name="detail_per_image.csv",
+                mime="text/csv",
+                key="dl_detail",
+                use_container_width=True
+            )
+        st.dataframe(df_detail, use_container_width=True)
+
+
+
+    # ---------- Tab 2: Single Image Analysis (기존 단일 이미지 뷰) ----------
+    with tab_single:
+        filenames = [file.name for file in st.session_state.uploaded_files]
+        selected_file = st.selectbox(t("pick_image"), filenames)
+
+        for uploaded_file in st.session_state.uploaded_files:
+            if uploaded_file.name == selected_file:
+                output, input_image = infer(model, uploaded_file, MODEL_BACKEND)
+
+                col1, col2 = st.columns([1, 1], gap="small")
+
+                if view_mode == "class":
+                    # 선택 클래스 마스크 / 평균 conf
+                    probs = softmax_channelwise(output)
+                    prob_map = probs[selected_class]
+                    mask_bin = (prob_map > threshold).astype(np.uint8)
+                    mask_rgb = np.zeros_like(input_image)
+                    color = color_map[selected_class]
+                    for i in range(3):
+                        mask_rgb[..., i] = mask_bin * color[i]
+
+                    pred_mask = output.argmax(0)
+                    cmask = (pred_mask == selected_class)
+                    sel_avg_conf = float(prob_map[cmask].mean()) if cmask.any() else 0.0
+
+                    blended = cv2.addWeighted(input_image, 1 - alpha, mask_rgb, alpha, 0)
+
+                    with col1:
+                        st.markdown(t("image_title").format(name=uploaded_file.name))
+                        image_zoom(blended)
+                    with col2:
+                        st.metric(label=t("sel_class_metric"), value=f"{sel_avg_conf:.3f}")
+
+                else:
+                    # 전체 마스크 색상화 + 비율 & 평균 conf
+                    pred_mask = output.argmax(0)
+                    mask_rgb = np.zeros_like(input_image)
+
+                    total_pixels = pred_mask.size
+                    percentages = {}
+                    for cid in range(class_num):
+                        class_pixels = int((pred_mask == cid).sum())
+                        percentages[cid] = (class_pixels / total_pixels) * 100 if total_pixels else 0.0
+                        color = color_map[cid]
+                        for i in range(3):
+                            mask_rgb[..., i][pred_mask == cid] = color[i]
+
+                    probs = softmax_channelwise(output)
+                    mean_conf = {}
+                    for cid in range(class_num):
+                        cmask = (pred_mask == cid)
+                        mean_conf[cid] = float(probs[cid][cmask].mean()) if cmask.any() else 0.0
+
+                    blended = cv2.addWeighted(input_image, 1 - alpha, mask_rgb, alpha, 0)
+
+                    with col1:
+                        st.markdown(t("image_title").format(name=uploaded_file.name))
+                        image_zoom(blended)
+                    with col2:
+                        class_ids = list(percentages.keys())
+                        df_percent = pd.DataFrame({
+                            t("col_class_id"): class_ids,
+                            t("col_pixel_pct"): [round(percentages[cid], 2) for cid in class_ids],
+                            t("col_avg_conf"): [round(mean_conf[cid], 3) for cid in class_ids],
+                        })
+                        st.markdown(t("table_title"))
+                        st.dataframe(df_percent, use_container_width=True)
+
+                # 마스크 저장 버튼 (단일 이미지)
+                mask_save = Image.fromarray(mask_rgb)
+                buf = BytesIO()
+                mask_save.save(buf, format="PNG")
+                buf.seek(0)
+                base, _ = os.path.splitext(uploaded_file.name)
+                st.download_button(
+                    label=t("download_mask"),
+                    data=buf,
+                    file_name=f"{base}_mask.png",
+                    mime="image/png",
+                )
+                break
