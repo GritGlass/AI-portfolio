@@ -12,14 +12,7 @@ A tool for analyzing the performance and results of segmentation models.
 ---
 
 ## 📽 Demo Video
-
-> ▶️ 아래 영상에서 실제 동작을 확인해보세요!
-
-<p align="center">
-  <a href="" target="_blank">
-    <img src="assets/analizer.png" width="600" alt="Watch the Demo"/>
-  </a>
-</p>
+preparing
 
 ---
 
@@ -28,7 +21,8 @@ A tool for analyzing the performance and results of segmentation models.
 - Segmenation 모델로 추론한 결과 확인
 - 모델의 confidence threshold로 mask 실시간 변화 확인 
 - 추론한 mask 이미지 저장  
-- Class별 픽셀 비율 확인  
+- Class별 픽셀 비율 확인
+- Class별 평균 신뢰고(Confidence) 확인
 
 ---
 
