@@ -16,6 +16,7 @@ from streamlit_image_zoom import image_zoom
 if "lang" not in st.session_state:
     st.session_state.lang = "ko"  # 기본 한국어
 
+
 TR = {
     "ko": {
         "page_title": "Segmentation Infer Analysis",
