@@ -3,7 +3,7 @@ import torchvision
 import pandas as pd
 from PIL import Image
 from tqdm import tqdm
-import ITB_RECALL_PRECISION_F1 as rp_f1
+import Performance_Measures as rp_f1
 
 
 class simpleDataset(object):
