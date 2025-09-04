@@ -46,6 +46,7 @@ Middle: Object detection with Transfer Learning
 Right: Improved detection after Active Transfer Learning
 
 ## 📂 Project Structure
+
 active_learning_object_detection/
 ├── ATL.py                   # Active learning loop function
 ├── ATLutils.py              # Utils - dataload,validation,inference
