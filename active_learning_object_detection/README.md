@@ -47,6 +47,7 @@ Right: Improved detection after Active Transfer Learning
 
 ## 📂 Project Structure
 
+``` bash
 active_learning_object_detection/
 ├── ATL.py                   # Active learning loop function
 ├── ATLutils.py              # Utils - dataload,validation,inference
