@@ -33,7 +33,7 @@ Retrain the model with the updated dataset until performance reaches the desired
 
 Batch-mode Active Transfer Learning for Document Object Detection
 
-### ** Pseudocode **
+### Pseudocode
 <p align="center"> <img src="./assets/pseudocode.png" width="70%"> </p>
 
 ## 📊 Example Results
