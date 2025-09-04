@@ -55,6 +55,7 @@ active_learning_object_detection/
 ├── main.ipynb               # Main script
 ├── Performance_Measures.py  # Measures - precision, recall, f1-score
 └── README.md
+```
 
 ## 📌 References
 
