@@ -25,11 +25,11 @@ A tool for analyzing the performance and results of segmentation models.
 
 ## Features
 
-- Segmenation 모델로 추론한 결과 확인
-- 모델의 confidence threshold로 mask 실시간 변화 확인 
-- 추론한 mask 이미지 저장  
-- Class별 픽셀 비율 확인
-- Class별 평균 신뢰고(Confidence) 확인
+- Dynamically adjust masks with the model’s confidence threshold
+- Save inferred mask images
+- View inference results from the segmentation model
+- Check pixel ratio per class 
+- Check average confidence per class
 
 ---
 
