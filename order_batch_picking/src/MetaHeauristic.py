@@ -153,7 +153,7 @@ class OBP:
         elif self.model_name=='HHO':
             return HHO.OriginalHHO(epoch=params.get('epoch'), pop_size=params.get('popsize'))
         elif self.model_name=='SPO':
-            return PSO.OriginalPSO(epoch=params.get('epoch'),c1=0.5,c2=0.5,pop_size=params.get('popsize'))
+            return PSO.OriginalPSO(epoch=params.get('epoch'),c1=2.0,c2=2.0,pop_size=params.get('popsize'))
 
 
 
