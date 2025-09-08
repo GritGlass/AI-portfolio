@@ -47,8 +47,8 @@ class OBP:
         #=========dataset===============
         self.model_name=MODEL_NAME
         self.dist_matrix=DIST_MATRIX
-        self.sample=SAMPLE
-        self.location=LOCATION[['aisle','slot','x','y']]
+        self.sample=SAMPLE[['order_num','slot']]
+        self.location=LOCATION[['aisle','rack','bay','slot','x','y']]
 
         #=========hyper paramer==========
         self.k = K 
@@ -63,7 +63,7 @@ class OBP:
     def _time_consumption(self,job_dist):
         ''' 시간=거리/속력, 성인 평균 걸음 속도= 80m/m (미터,분) '''
         max_distance=job_dist.max()
-        return max_distance*80
+        return max_distance/80
     
     def _prior_items(self,batch_order):
         items=[]
@@ -124,10 +124,10 @@ class OBP:
         sol = np.asarray(solution)
 
         #sloution이 카테고리가 아니라 numeric float로 생성될 경우-> int로 변경
-        if np.issubdtype(sol.dtype, np.floating):
-            job = np.rint(sol).astype(int) % self.k
-        else:
-            job = sol.astype(int)
+        # if np.issubdtype(sol.dtype, np.floating):
+        #     job = np.rint(sol).astype(int) % self.k
+        # else:
+        job = sol.astype(int)
 
         job_dist = self.order_distance(job)
         if job_dist.size == 0:
@@ -150,7 +150,10 @@ class OBP:
             return ServalOA.OriginalServalOA(epoch=params.get('epoch'), pop_size=params.get('popsize'),seed=params.get('seed'))
         elif self.model_name=='STO':
             return TDO.OriginalTDO(epoch=params.get('epoch'), pop_size=params.get('popsize'),seed=params.get('seed'))
-
+        elif self.model_name=='HHO':
+            return HHO.OriginalHHO(epoch=params.get('epoch'), pop_size=params.get('popsize'))
+        elif self.model_name=='SPO':
+            return PSO.OriginalPSO(epoch=params.get('epoch'),c1=0.5,c2=0.5,pop_size=params.get('popsize'))
 
 
 
