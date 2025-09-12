@@ -137,6 +137,48 @@ class OBP:
         obj = self.a *time_cost + (1-self.a)*job_dist.var()
         return float(obj)
     
+    def fitness2(self,solution):
+        """
+        job_dist: 길이 K 배열 (각 job의 총 이동 거리, meters)
+        handle_times: 길이 K 배열 (각 job의 피킹/처리 시간, minutes). 없으면 0.
+        """
+        speed_m_per_min=80.0
+        handle_times=None,
+        a=0.8 
+        alpha=5.0
+        lam_bal=1.0
+        lam_avg=1e-3
+        eps=1e-9
+        
+        sol = np.asarray(solution)
+        job = sol.astype(int)
+
+        job_dist = self.order_distance(job)
+
+        job_dist = np.asarray(job_dist, dtype=float)
+        K = len(job_dist)
+        if handle_times is None:
+            handle_times = np.zeros(K, dtype=float)
+        else:
+            handle_times = np.asarray(handle_times, dtype=float)
+
+        # 각 배치 시간 (분)
+        T = job_dist / speed_m_per_min + handle_times
+
+        # 스무딩된 max (LSE)
+        lse = (1.0/alpha) * np.log(np.exp(alpha*T).sum())
+
+        # 균형: 변동계수(CV) -> 스케일 불변
+        mean_T = T.mean()
+        std_T  = T.std(ddof=0)
+        cv_T   = std_T / (mean_T + eps)
+
+        # 전체 평균(미세 타이브레이커)
+        avg_T = mean_T
+
+        J = a * lse + (1 - a) * lam_bal * cv_T + lam_avg * avg_T
+        return float(J)
+
 
     def model(self,params):
         ''' params: {epoch: , popsize: , nlimits: , seed: }  '''
@@ -159,9 +201,9 @@ class OBP:
 
     def run(self,model):
         bounds = [CategoricalVar(valid_sets=tuple(range(self.k))) for _ in range(self.n)] # [1],[1],[2],[2],[0],[3],... : order id
-
+       
         problem = {
-            "obj_func": self.fitness,   
+            "obj_func": self.fitness2,   
             "bounds": bounds,
             "minmax": "min",
         }
