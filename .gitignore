@@ -1,0 +1,47 @@
+#folder
+**/data/
+dataset
+temp
+**/.ipynb_checkpoints
+**/temp/
+**/wandb/
+
+#가상환경
+.venv 
+venv-metal/
+.conda
+.husky
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+*.venv
+env/
+venv/
+
+#model weight
+*.pt 
+*.h5
+*.keras
+*.onnx
+
+# 환경 설정 파일
+.env
+*.local
+
+# 로그 파일
+*.log
+logs/
+
+# Python packages
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
