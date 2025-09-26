@@ -1,0 +1,834 @@
+{
+    "pages": [
+        {
+            "page_idx": 0,
+            "dimensions": [
+                155,
+                1364
+            ],
+            "orientation": {
+                "value": null,
+                "confidence": null
+            },
+            "language": {
+                "value": null,
+                "confidence": null
+            },
+            "blocks": [
+                {
+                    "geometry": [
+                        [
+                            0.001953125,
+                            0.02734375
+                        ],
+                        [
+                            0.9990234375,
+                            0.9640625
+                        ]
+                    ],
+                    "objectness_score": 0.8114889248421318,
+                    "lines": [
+                        {
+                            "geometry": [
+                                [
+                                    0.001953125,
+                                    0.02734375
+                                ],
+                                [
+                                    0.0244140625,
+                                    0.23359375
+                                ]
+                            ],
+                            "objectness_score": 0.797649621963501,
+                            "words": [
+                                {
+                                    "value": "3.",
+                                    "confidence": 0.9999617338180542,
+                                    "geometry": [
+                                        [
+                                            0.001953125,
+                                            0.02734375
+                                        ],
+                                        [
+                                            0.0244140625,
+                                            0.23359375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.797649621963501,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "geometry": [
+                                [
+                                    0.0771484375,
+                                    0.03593750000000001
+                                ],
+                                [
+                                    0.9990234375,
+                                    0.259375
+                                ]
+                            ],
+                            "objectness_score": 0.7975193609793981,
+                            "words": [
+                                {
+                                    "value": "Bidding",
+                                    "confidence": 0.9998425245285034,
+                                    "geometry": [
+                                        [
+                                            0.0771484375,
+                                            0.05312499999999998
+                                        ],
+                                        [
+                                            0.15625,
+                                            0.25078125
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8782553672790527,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "will",
+                                    "confidence": 0.9694124460220337,
+                                    "geometry": [
+                                        [
+                                            0.16796875,
+                                            0.04453125000000002
+                                        ],
+                                        [
+                                            0.20703125,
+                                            0.22499999999999998
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8204298615455627,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "be",
+                                    "confidence": 0.99628084897995,
+                                    "geometry": [
+                                        [
+                                            0.2197265625,
+                                            0.03593750000000001
+                                        ],
+                                        [
+                                            0.24609375,
+                                            0.23359375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8185911774635315,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "conducted",
+                                    "confidence": 0.9963725805282593,
+                                    "geometry": [
+                                        [
+                                            0.255859375,
+                                            0.04453125000000002
+                                        ],
+                                        [
+                                            0.3583984375,
+                                            0.22499999999999998
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8054671287536621,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "through",
+                                    "confidence": 0.9919471144676208,
+                                    "geometry": [
+                                        [
+                                            0.3720703125,
+                                            0.04453125000000002
+                                        ],
+                                        [
+                                            0.447265625,
+                                            0.25078125
+                                        ]
+                                    ],
+                                    "objectness_score": 0.804305911064148,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "open",
+                                    "confidence": 0.9996886253356934,
+                                    "geometry": [
+                                        [
+                                            0.4609375,
+                                            0.08750000000000002
+                                        ],
+                                        [
+                                            0.509765625,
+                                            0.259375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8748048543930054,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "competitive",
+                                    "confidence": 0.8648962378501892,
+                                    "geometry": [
+                                        [
+                                            0.5224609375,
+                                            0.05312499999999998
+                                        ],
+                                        [
+                                            0.6376953125,
+                                            0.25078125
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7602970600128174,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "bidding",
+                                    "confidence": 0.8730173707008362,
+                                    "geometry": [
+                                        [
+                                            0.65234375,
+                                            0.04453125000000002
+                                        ],
+                                        [
+                                            0.7265625,
+                                            0.25078125
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7923443913459778,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "procedures",
+                                    "confidence": 0.9922980666160583,
+                                    "geometry": [
+                                        [
+                                            0.740234375,
+                                            0.05312499999999998
+                                        ],
+                                        [
+                                            0.845703125,
+                                            0.25078125
+                                        ]
+                                    ],
+                                    "objectness_score": 0.762116551399231,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "using",
+                                    "confidence": 0.999932050704956,
+                                    "geometry": [
+                                        [
+                                            0.859375,
+                                            0.04453125000000002
+                                        ],
+                                        [
+                                            0.9150390625,
+                                            0.259375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8042402267456055,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "a",
+                                    "confidence": 0.9999887943267822,
+                                    "geometry": [
+                                        [
+                                            0.9248046875,
+                                            0.07890625000000001
+                                        ],
+                                        [
+                                            0.94140625,
+                                            0.23359375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7033276557922363,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "non-",
+                                    "confidence": 0.9997259974479675,
+                                    "geometry": [
+                                        [
+                                            0.94921875,
+                                            0.07890625000000001
+                                        ],
+                                        [
+                                            0.9990234375,
+                                            0.23359375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7460521459579468,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "geometry": [
+                                [
+                                    0.078125,
+                                    0.26796875
+                                ],
+                                [
+                                    0.9970703125,
+                                    0.50859375
+                                ]
+                            ],
+                            "objectness_score": 0.8306765447963368,
+                            "words": [
+                                {
+                                    "value": "discretionary",
+                                    "confidence": 0.9968851208686829,
+                                    "geometry": [
+                                        [
+                                            0.078125,
+                                            0.29375
+                                        ],
+                                        [
+                                            0.203125,
+                                            0.49140625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7973252534866333,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "\"pass/fail\"",
+                                    "confidence": 0.8514821529388428,
+                                    "geometry": [
+                                        [
+                                            0.216796875,
+                                            0.28515625
+                                        ],
+                                        [
+                                            0.318359375,
+                                            0.50859375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8161049485206604,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "criterion",
+                                    "confidence": 0.9797765612602234,
+                                    "geometry": [
+                                        [
+                                            0.3291015625,
+                                            0.29375
+                                        ],
+                                        [
+                                            0.4111328125,
+                                            0.45703125
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8895652294158936,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "as",
+                                    "confidence": 0.9983183145523071,
+                                    "geometry": [
+                                        [
+                                            0.4208984375,
+                                            0.31953125
+                                        ],
+                                        [
+                                            0.4423828125,
+                                            0.47421875
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8343046307563782,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "specified",
+                                    "confidence": 0.9989558458328247,
+                                    "geometry": [
+                                        [
+                                            0.4521484375,
+                                            0.29375
+                                        ],
+                                        [
+                                            0.5400390625,
+                                            0.49140625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8583459854125977,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "in",
+                                    "confidence": 0.9998769760131836,
+                                    "geometry": [
+                                        [
+                                            0.5478515625,
+                                            0.26796875
+                                        ],
+                                        [
+                                            0.5732421875,
+                                            0.47421875
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7637238502502441,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "the",
+                                    "confidence": 0.9999551773071289,
+                                    "geometry": [
+                                        [
+                                            0.5791015625,
+                                            0.28515625
+                                        ],
+                                        [
+                                            0.611328125,
+                                            0.47421875
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8288049101829529,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "Implementing",
+                                    "confidence": 0.7288188934326172,
+                                    "geometry": [
+                                        [
+                                            0.6220703125,
+                                            0.30234375
+                                        ],
+                                        [
+                                            0.7568359375,
+                                            0.49140625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8439896702766418,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "Rules",
+                                    "confidence": 0.8322208523750305,
+                                    "geometry": [
+                                        [
+                                            0.767578125,
+                                            0.29375
+                                        ],
+                                        [
+                                            0.8232421875,
+                                            0.45703125
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8812562823295593,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "and",
+                                    "confidence": 0.9988058805465698,
+                                    "geometry": [
+                                        [
+                                            0.8330078125,
+                                            0.28515625
+                                        ],
+                                        [
+                                            0.8701171875,
+                                            0.465625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8490943312644958,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "Regulations",
+                                    "confidence": 0.8871015310287476,
+                                    "geometry": [
+                                        [
+                                            0.880859375,
+                                            0.29375
+                                        ],
+                                        [
+                                            0.9970703125,
+                                            0.49140625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7749269008636475,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "geometry": [
+                                [
+                                    0.0751953125,
+                                    0.52578125
+                                ],
+                                [
+                                    0.998046875,
+                                    0.76640625
+                                ]
+                            ],
+                            "objectness_score": 0.8078581442435583,
+                            "words": [
+                                {
+                                    "value": "(IRR)",
+                                    "confidence": 0.9991052746772766,
+                                    "geometry": [
+                                        [
+                                            0.0751953125,
+                                            0.52578125
+                                        ],
+                                        [
+                                            0.134765625,
+                                            0.76640625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7989821434020996,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "of",
+                                    "confidence": 0.8758881092071533,
+                                    "geometry": [
+                                        [
+                                            0.1455078125,
+                                            0.534375
+                                        ],
+                                        [
+                                            0.171875,
+                                            0.7234375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8564175367355347,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "Republic",
+                                    "confidence": 0.9879626631736755,
+                                    "geometry": [
+                                        [
+                                            0.1806640625,
+                                            0.54296875
+                                        ],
+                                        [
+                                            0.2685546875,
+                                            0.740625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8362318277359009,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "Act",
+                                    "confidence": 0.9996757507324219,
+                                    "geometry": [
+                                        [
+                                            0.28125,
+                                            0.534375
+                                        ],
+                                        [
+                                            0.318359375,
+                                            0.71484375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8280166983604431,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "(RA)",
+                                    "confidence": 0.9415538311004639,
+                                    "geometry": [
+                                        [
+                                            0.330078125,
+                                            0.534375
+                                        ],
+                                        [
+                                            0.380859375,
+                                            0.7578125
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7755671739578247,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "9184,",
+                                    "confidence": 0.5122379660606384,
+                                    "geometry": [
+                                        [
+                                            0.392578125,
+                                            0.534375
+                                        ],
+                                        [
+                                            0.4482421875,
+                                            0.74921875
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7821580171585083,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "otherwise",
+                                    "confidence": 0.9841506481170654,
+                                    "geometry": [
+                                        [
+                                            0.4609375,
+                                            0.54296875
+                                        ],
+                                        [
+                                            0.5556640625,
+                                            0.70625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8422350287437439,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "known",
+                                    "confidence": 0.9992782473564148,
+                                    "geometry": [
+                                        [
+                                            0.5693359375,
+                                            0.54296875
+                                        ],
+                                        [
+                                            0.6357421875,
+                                            0.70625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.886091411113739,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "as",
+                                    "confidence": 0.9992560744285583,
+                                    "geometry": [
+                                        [
+                                            0.6484375,
+                                            0.57734375
+                                        ],
+                                        [
+                                            0.6708984375,
+                                            0.7234375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8262506127357483,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "the",
+                                    "confidence": 0.9992941617965698,
+                                    "geometry": [
+                                        [
+                                            0.6806640625,
+                                            0.534375
+                                        ],
+                                        [
+                                            0.7138671875,
+                                            0.7234375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7671772241592407,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "\"Government",
+                                    "confidence": 0.9851313233375549,
+                                    "geometry": [
+                                        [
+                                            0.724609375,
+                                            0.534375
+                                        ],
+                                        [
+                                            0.859375,
+                                            0.71484375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7627836465835571,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "Procurement",
+                                    "confidence": 0.7796785235404968,
+                                    "geometry": [
+                                        [
+                                            0.87109375,
+                                            0.54296875
+                                        ],
+                                        [
+                                            0.998046875,
+                                            0.7234375
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7323864102363586,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "geometry": [
+                                [
+                                    0.076171875,
+                                    0.775
+                                ],
+                                [
+                                    0.208984375,
+                                    0.9640625
+                                ]
+                            ],
+                            "objectness_score": 0.8184787333011627,
+                            "words": [
+                                {
+                                    "value": "Reform",
+                                    "confidence": 0.9646288156509399,
+                                    "geometry": [
+                                        [
+                                            0.076171875,
+                                            0.775
+                                        ],
+                                        [
+                                            0.15234375,
+                                            0.9640625
+                                        ]
+                                    ],
+                                    "objectness_score": 0.7506580948829651,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                },
+                                {
+                                    "value": "Act\".",
+                                    "confidence": 0.5666080117225647,
+                                    "geometry": [
+                                        [
+                                            0.158203125,
+                                            0.78359375
+                                        ],
+                                        [
+                                            0.208984375,
+                                            0.95546875
+                                        ]
+                                    ],
+                                    "objectness_score": 0.8862993717193604,
+                                    "crop_orientation": {
+                                        "value": 0,
+                                        "confidence": null
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "artefacts": []
+                }
+            ]
+        }
+    ]
+}
