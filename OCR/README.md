@@ -48,7 +48,7 @@ A tool that processes document images through layout detection → table extract
 
 3. Run the script
    ```
-    python your_script.py --image ./samples/doc1.png --save_vis ./output
+    python layout_aware_ocr.py --image ./data/sample.jpg --save_vis ./output
    ```
   - Example output folder (./output):
     - ocr_1.png, ocr_1.json

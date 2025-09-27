@@ -1,19 +1,15 @@
 import argparse
 from pathlib import Path
-from typing import List
 from PIL import Image, ImageDraw
-import torch
-import numpy as np
+import json
+
 from doclayout_yolo import YOLOv10
-from paddleocr import TextRecognition,TableCellsDetection
 from img2table.document import Image as ImgDoc
 from img2table.ocr import PaddleOCR as PaddleOCR_Img
-import os
-import cv2
 from paddleocr import ChartParsing
 from doctr.io import DocumentFile
 from doctr.models import ocr_predictor
-import json
+
 
 def main_layout():
     parser = argparse.ArgumentParser()
@@ -26,8 +22,6 @@ def main_layout():
     args = parser.parse_args()
 
     yolo = YOLOv10("E:/glass_git/AI-portfolio/OCR/model/doclayout_yolo_docstructbench_imgsz1024.pt")
-    ocr_model = TextRecognition(model_name="PP-OCRv5_server_rec")
-    table_engine =TableCellsDetection(model_name="RT-DETR-L_wired_table_cell_det")
     chartmodel = ChartParsing(model_name="PP-Chart2Table")
     ocr_model2 = ocr_predictor(pretrained=True)
 
