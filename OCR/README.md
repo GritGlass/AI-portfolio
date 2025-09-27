@@ -16,7 +16,7 @@ A tool that processes document images through layout detection → table extract
          width="640" />
   </a>
   <br/>
-  <sub>Image Segmentation Analysis App</sub>
+  <sub>Document OCR</sub>
 </div>
 
 ---
