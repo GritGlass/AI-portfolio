@@ -37,9 +37,8 @@ A tool that processes document images through layout detection → table extract
 
 1. Clone this repository
     ```
-    git clone https://github.com/yourname/document-ocr-analyzer.git
-
-    cd document-ocr-analyzer
+    git clone https://github.com/GritGlass/AI-portfolio.git
+    cd AI-portfolio/OCR
     ```
 
 2. Install dependencies from requirements.txt
