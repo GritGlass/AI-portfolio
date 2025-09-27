@@ -13,7 +13,7 @@ A tool that processes document images through layout detection → table extract
 ## 📷 Example
 <div align="center">
     <img src="https://github.com/GritGlass/AI-portfolio/blob/3a4e16a130a4b0aba49cca62070fb28ec93e339f/OCR/assets/OCR.png"
-         width="340" />
+         width="640" />
   </a>
   <br/>
   <sub>Image Segmentation Analysis App</sub>
