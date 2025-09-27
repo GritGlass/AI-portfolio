@@ -1,0 +1,19 @@
+# Core ML frameworks
+torch
+torchvision
+torchaudio
+
+# Computer Vision
+opencv-python
+pillow
+matplotlib
+
+# Data Handling
+pandas
+numpy
+
+# Document Layout & OCR
+doclayout-yolo
+img2table
+paddleocr
+python-doctr
