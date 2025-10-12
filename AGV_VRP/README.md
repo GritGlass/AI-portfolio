@@ -43,7 +43,7 @@ Multiple AGVs operate on a Manhattan grid-based port environment and construct *
 
 5. **Scheduling & Time Accumulation**
 
-   * Travel time: $\text{time} = \frac{\text{distance}}{\text{speed\cells\per\sec}}$
+   * Travel time: $\text{time}=\frac{\text{distance}}{\text{speed\cells\per\sec}}$
    * Task service: accumulate `service_time` upon arrival at each task.
    * Completion time: accumulated time up to that task + `service_time`
    * Lateness: completion time > `deadline`
