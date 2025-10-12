@@ -51,7 +51,9 @@ Multiple AGVs operate on a Manhattan grid-based port environment and construct *
 6. **Objective Calculation**
 
    * Total score = total travel time + total service time + total lateness penalty
-   * ( \min ; \sum t_{move} + \sum t_{service} + \sum \text{penalty_late} )
+   * $$
+      t_{move} = \frac{\text{Manhattan distance}}{\text{speed\_cells\_per\_sec}}
+      $$
 
 ---
 
