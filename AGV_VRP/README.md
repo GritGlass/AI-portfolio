@@ -43,7 +43,7 @@ Multiple AGVs operate on a Manhattan grid-based port environment and construct *
 
 5. **Scheduling & Time Accumulation**
 
-   * Travel time: time = distance X speed_cells_per_sec
+   * Travel time: time = distance * speed_cells_per_sec
    * Task service: accumulate `service_time` upon arrival at each task.
    * Completion time: accumulated time up to that task + `service_time`
    * Lateness: completion time > `deadline`
@@ -61,7 +61,7 @@ Multiple AGVs operate on a Manhattan grid-based port environment and construct *
   * All AGVs start simultaneously and **collisions are assumed to be avoided**.
   * Grid-based sensor path → **Manhattan distance** is used.
   * Travel time is **accumulated** and **does not reset** when returning to the depot.
-  * time = distance X speed_cells_per_sec
+  * time = distance * speed_cells_per_sec
 
 * **Task Rules**
 
