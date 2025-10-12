@@ -116,7 +116,7 @@ pip install -r requirements.txt
 
 ## 📄 License
 
-본 저장소의 코드는 연구/학습 목적 사용을 우선으로 하며, 상업적 이용 전 별도 문의 바랍니다.
+This repository is provided for research and educational purposes only. For any commercial use, please contact the author beforehand.
 
 ---
 
