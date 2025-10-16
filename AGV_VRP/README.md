@@ -21,7 +21,7 @@ Multiple AGVs operate on a Manhattan grid-based port environment and construct *
 
 ## 🪢 Algorithm
 
-<p align="center"> <img src="./assets/algorithm.png" width="70%"> </p>
+<p align="center"> <img src="./assets/algorithm.png" width="30%"> </p>
 
 ---
 
