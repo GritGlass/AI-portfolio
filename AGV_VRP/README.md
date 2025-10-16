@@ -19,6 +19,19 @@ Multiple AGVs operate on a Manhattan grid-based port environment and construct *
 
 ---
 
+## 🪢 Algorithm
+
+<p align="center"> <img src="./assets/algorithm.png" width="70%"> </p>
+
+---
+
+## 📊 Performance
+
+<p align="center"> <img src="./assets/img2.png" width="70%"> </p>
+
+---
+
+
 ## 🔧 How it Works (Pipeline)
 
 1. **Input Load**
@@ -102,7 +115,6 @@ pip install -r requirements.txt
 | Tool/Lib                       | Purpose                              |
 | ------------------------------ | -------------------------------------|
 | **NumPy / Pandas**             | Data processing, score/time accumulation  |
-| **NetworkX / Matplotlib**      | Graph construction, route and Gantt chart visualization |
 | **Google OR-Tools**            | Modeling VRP with Time Windows/Capacity |
 
 ---
@@ -118,8 +130,3 @@ pip install -r requirements.txt
 This repository is provided for research and educational purposes only. For any commercial use, please contact the author beforehand.
 
 ---
-
-## 📬 Contact
-
-* Author: **GritGlass (YU H.)**
-* Repo: [https://github.com/GritGlass/AI-portfolio/tree/master/AGV_VRP](https://github.com/GritGlass/AI-portfolio/tree/master/AGV_VRP)
