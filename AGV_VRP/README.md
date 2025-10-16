@@ -19,6 +19,19 @@ Multiple AGVs operate on a Manhattan grid-based port environment and construct *
 
 ---
 
+## 🪢 Algorithm
+
+<p align="center"> <img src="./assets/algorithm.png" width="70%"> </p>
+
+---
+
+## 📊 Performance
+
+<p align="center"> <img src="./assets/img2.png" width="70%"> </p>
+
+---
+
+
 ## 🔧 How it Works (Pipeline)
 
 1. **Input Load**
