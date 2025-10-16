@@ -102,7 +102,6 @@ pip install -r requirements.txt
 | Tool/Lib                       | Purpose                              |
 | ------------------------------ | -------------------------------------|
 | **NumPy / Pandas**             | Data processing, score/time accumulation  |
-| **NetworkX / Matplotlib**      | Graph construction, route and Gantt chart visualization |
 | **Google OR-Tools**            | Modeling VRP with Time Windows/Capacity |
 
 ---
