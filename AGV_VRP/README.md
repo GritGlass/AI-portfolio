@@ -117,8 +117,3 @@ pip install -r requirements.txt
 This repository is provided for research and educational purposes only. For any commercial use, please contact the author beforehand.
 
 ---
-
-## 📬 Contact
-
-* Author: **GritGlass (YU H.)**
-* Repo: [https://github.com/GritGlass/AI-portfolio/tree/master/AGV_VRP](https://github.com/GritGlass/AI-portfolio/tree/master/AGV_VRP)
