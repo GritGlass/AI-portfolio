@@ -18,7 +18,7 @@ Train on data from seven batteries, then perform transfer learning using the fir
 ## 📘 Model
 
 A model built with dense layers
-<p align="center"> <img src="./assets/DNN.png" width="30%"> </p>
+<p align="center"> <img src="./assets/DNN.png" width="10%"> </p>
 
 
 ## 📊 Code
