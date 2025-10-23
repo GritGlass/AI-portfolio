@@ -24,16 +24,16 @@ A model built with dense layers
 ## 📊 Code
 
 ```bash
-# 1) Run the preprocessing code
+# 1) Run the perp.sh (Preprocessing)
 bash prep.sh
 
-# 2) Run the runinig code, 
+# 2) Run the run.sh (train,fintune,test), 
 bash run.sh
 
 <run.sh>  #Please run the code one by one.
 #train
 python ./src/run.py --input ./data --test_id 7 --early_stop 30 --epoch 1000 --test_cycle 20 --run_type train --output ./result --try_id 1 --resume checkpoint_file.ckpt
-#fine tuning
+#finetune
 python ./src/run.py --input ./data --test_id 7 --early_stop 30 --epoch 1000 --test_cycle 20 --run_type valid --output ./result --try_id 1 --model_weights checkpoint_file.ckpt
 #test
 python ./src/run.py --input ./data --test_id 7 --test_cycle 20 --run_type test --output ./result --try_id 1 --model_weights checkpoint_file.ckpt
