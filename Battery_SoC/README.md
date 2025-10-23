@@ -58,7 +58,7 @@ python ./src/run.py --input ./data --test_id 7 --test_cycle 20 --run_type test -
 
 ## 📊 Result
 ---
-**MSE**       : 0.20           **R-squared** : 0.99
+The model achieved a **Mean Squared Error (MSE) of 0.20** and an **R-squared (R²) value of 0.99**.
 
 
 <p align="center"> <img src="./assets/TL_DNN_results.png" width="70%"> </p>
