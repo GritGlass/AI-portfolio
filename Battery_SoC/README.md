@@ -38,7 +38,7 @@ python ./src/run.py --input ./data --test_id 7 --early_stop 30 --epoch 1000 --te
 #test
 python ./src/run.py --input ./data --test_id 7 --test_cycle 20 --run_type test --output ./result --try_id 1 --model_weights checkpoint_file.ckpt
 
-*All data — including model checkpoints, parameters set in the bash script, and result logs — are stored in the output path.
+#All data — including model checkpoints, parameters set in the bash script, and result logs — are stored in the output path.
 
 ```
 | Argument | Type | Require | Description |
@@ -58,6 +58,8 @@ python ./src/run.py --input ./data --test_id 7 --test_cycle 20 --run_type test -
 
 ## 📊 Result
 ---
+**MSE**       : 0.20           **R-squared** : 0.99
+
 
 <p align="center"> <img src="./assets/TL_DNN_results.png" width="70%"> </p>
 
