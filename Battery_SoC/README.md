@@ -41,18 +41,18 @@ python ./src/run.py --input ./data --test_id 7 --test_cycle 20 --run_type test -
 #All data — including model checkpoints, parameters set in the bash script, and result logs — are stored in the output path.
 
 ```
-|   Argument   | Type | Require | Description |
-|--------------|------|---------|-------------|
-| --input | str | True | Data folder path |
-| --test_id | int | True | Test file number of the input folder |
-| --early_stop | int | True(default=30) | Model early stop |
-| --epoch | int | True(default=1000) | Model training epoch |
-| --test_cycle | int | True | Set the test cycle: use the data before this cycle for fine-tuning, and the data after this cycle for testing. |
-| --run_type | str | True | Select operation type, one of {train, finetuning, test} |
-| --model_weights | str | False | Ckpt path for finetuning and test operation |
-| --output | str | True | Root path for saving everything |
-| --try_id | int | True | Try_id |
-| --resume | str | False | Checkpoint file path for resuming training |
+|   Argument        | Type | Require | Description |
+|-------------------|------|---------|-------------|
+| --input           | str | True | Data folder path |
+| --test_id         | int | True | Test file number of the input folder |
+| --early_stop      | int | True(default=30) | Model early stop |
+| --epoch           | int | True(default=1000) | Model training epoch |
+| --test_cycle      | int | True | Set the test cycle: use the data before this cycle for fine-tuning, and the data after this cycle for testing. |
+| --run_type        | str | True | Select operation type, one of {train, finetuning, test} |
+| --model_weights   | str | False | Ckpt path for finetuning and test operation |
+| --output          | str | True | Root path for saving everything |
+| --try_id          | int | True | Try_id |
+| --resume          | str | False | Checkpoint file path for resuming training |
 
 ---
 
