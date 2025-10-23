@@ -41,8 +41,8 @@ python ./src/run.py --input ./data --test_id 7 --test_cycle 20 --run_type test -
 #All data — including model checkpoints, parameters set in the bash script, and result logs — are stored in the output path.
 
 ```
-| Argument | Type | Require | Description |
-|----------|------|---------|-------------|
+|   Argument   | Type | Require | Description |
+|--------------|------|---------|-------------|
 | --input | str | True | Data folder path |
 | --test_id | int | True | Test file number of the input folder |
 | --early_stop | int | True(default=30) | Model early stop |
