@@ -6,3 +6,4 @@
 | `segmentation_analyzer` | Image Segmentation Analysis App | Streamlit |
 | `Document OCR` | Document Text Recognition | Python |
 | `AGV_VRP` | Smart Port AGV Routing Optimization Challenge | Meta-heuristic |
+| `Battery Soc` | Lithium-ion battery state of charge estimation  | Pytorch, Transfer-learning |
